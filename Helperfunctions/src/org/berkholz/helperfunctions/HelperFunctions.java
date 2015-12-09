@@ -5,9 +5,7 @@
  */
 package org.berkholz.helperfunctions;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,21 +13,17 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
-import javax.xml.bind.Unmarshaller;
 
 /**
  *
  * @author Marcel Berkholz
  */
 public class HelperFunctions {
+
+    private static final Logger LOG = Logger.getLogger(HelperFunctions.class.getName());
 
     /**
      * Returns a pseudo-random number between min and max, inclusive. The
@@ -91,6 +85,7 @@ public class HelperFunctions {
         try {
             while (rs.next()) {
                 n++;
+                // TODO: change to your needs
                 System.out.println(MessageFormat.format("ID: {0} \nCAT: {1} \nFULL: {2} \nSHORT: {3} \nIDNUM: {4} \nTIME: {5}\nT2:{6}\n---------", rs.getBigDecimal("id"),
                         rs.getBigDecimal("category").toBigInteger(),
                         rs.getString("fullname"),
@@ -101,7 +96,7 @@ public class HelperFunctions {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(HelperFunctions.class.getName()).log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            LOG.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
         }
         System.out.println("\nCount: " + n);
     }
