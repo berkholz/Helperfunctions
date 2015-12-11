@@ -1,2 +1,2 @@
 # Helperfunctions
-Helperfunctions for JAVA project.
+Helperfunctions for JAVA projects.
