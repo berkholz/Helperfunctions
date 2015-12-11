@@ -5,13 +5,18 @@
  */
 package org.berkholz.helperfunctions;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
@@ -115,5 +120,32 @@ public class HelperFunctions {
             LOG.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
         }
         return null;
+    }
+    
+        /**
+     * Reads in a file and returns the content of the file, each line an entry,
+     * as list.
+     *
+     * @param file File to read from the text.
+     * @return Every line of the file is stored as an entry in the list.
+     */
+    public static List<String> readStringArrayFromFile(File file) {
+        Charset charset = Charset.forName("UTF-8");
+        List<String> resultStringArray = new ArrayList<>();
+
+        if (file.exists()) {
+            try (BufferedReader reader = Files.newBufferedReader(file.toPath(), charset)) {
+                String currentLine;
+
+                while ((currentLine = reader.readLine()) != null) {
+                    resultStringArray.add(currentLine);
+//                    Logger.getLogger(LDAPFunctions.class.getName()).log(Level.INFO, "Adding line: {0}", currentLine);
+                }
+                reader.close();
+            } catch (IOException e) {
+                LOG.log(Level.SEVERE, e.getLocalizedMessage(), e);
+            }
+        }
+        return resultStringArray;
     }
 }
