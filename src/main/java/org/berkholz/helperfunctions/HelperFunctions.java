@@ -162,13 +162,14 @@ public class HelperFunctions {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Return the platform independent representation of the users home directory.
-	 * 
+	 * Return the platform independent representation of the users home
+	 * directory.
+	 *
 	 * @return Directory of the users home directory as String.
 	 */
-	public static String getUserHomeDirectory(){
+	public static String getUserHomeDirectory() {
 		return System.getProperty("user.home");
 	}
 }
